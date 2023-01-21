@@ -14,7 +14,7 @@ class Line {
 }
 
 
-export function rate_box() {
+export function rate_box(lines: Array<[[number, number], [number, number]]>) {
     let line = new Line([1, 2], [4, 3])
     line.print();
 }

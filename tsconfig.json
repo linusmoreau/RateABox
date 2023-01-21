@@ -2,9 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "sourceMap": true
+    "sourceMap": true,
+    "outDir": "build"
   },
   "exclude": [
     "node_modules"
+  ],
+  "lib": [
+    "es2018",
+    "esnext",
+    "dom"
   ]
 }

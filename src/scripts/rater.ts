@@ -1,5 +1,5 @@
 
-class Line {
+export class Line {
     start: [number, number];
     end: [number, number];
     y_equation: ([number, number] | null);   // y = number * x + number
@@ -45,13 +45,8 @@ function determine_vanishing_point(lines: Line[]) : [number, number] {
 
 // rate_box receives the lines defining the edges of a box and returns a rating.
 // Argument lines must be of length 9 or 12
-export function rate_box(lines: Array<[[number, number], [number, number]]>) : number {
-    let _lines: Line[] = [];
-    for (let line of lines) {
-        _lines.push(new Line(line[0], line[1]));
-    }
+export function rate_box(lines: Line[]) : number {
+
     return 0;
 }
-
-rate_box([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
 

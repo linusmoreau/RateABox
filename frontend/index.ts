@@ -1,9 +1,23 @@
-function pencil(): void {
-    alert("You've switched to pencil'");
+let current: string = "Draw";
+
+function draw(value: string): void {
+    if (current !== value) {
+        let element: HTMLElement = document.getElementById("er");
+        element.className = "button";
+        element = document.getElementById("dr");
+        element.className = "highlight";
+        current = "Draw";
+    }
 }
 
-function eraser(): void {
-    alert("You've switched to eraser");
+function eraser(value: any): void {
+    if (current !== value) {
+        let element: HTMLElement = document.getElementById("dr");
+        element.className = "button";
+        element = document.getElementById("er");
+        element.className = "highlight";
+        current = "Eraser";
+    }
 }
 
 function undo(): void {

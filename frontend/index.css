@@ -14,9 +14,15 @@
     color: white;
 }
 
-.button:active {
+.highlight {
     background-color: #666;
-    color: mediumspringgreen;
+    border: none;
+    color: white;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
 }
 
 /* The side navigation menu */

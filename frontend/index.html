@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en-ca">
 <head>
     <meta charset="utf-8">
@@ -9,14 +10,13 @@
 <h1>Rate a Box</h1>
 <div class="sidebar">
     <form>
-        <input type="button" value="Draw" onclick="pencil()" class="button"/><br>
-        <input type="button" value="Eraser" onclick="eraser()" class="button"/><br>
+        <input type="button" value="Draw" onclick="draw(this.value)" class="highlight" id="dr"/><br>
+        <input type="button" value="Eraser" onclick="eraser(this.value)" class="button" id="er"/><br>
         <input type="button" value="Undo" onclick="undo()" class="button"/><br>
         <input type="button" value="Redo" onclick="redo()" class="button"/><br>
         <input type="button" value="Grade" onclick="grade()" class="button"/>
     </form>
 </div>
-
 <script src="index.js">
 </script>
 </body>

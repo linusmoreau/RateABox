@@ -40,6 +40,11 @@
     width: 50px;
 }
 
+.main {
+    margin-left: 200px; /* Same as the width of the sidebar */
+    padding: 10px;
+}
+
 /*.toggle {*/
 /*    --width: 80px;*/
 /*    --height: calc(var(--width) / 3);*/

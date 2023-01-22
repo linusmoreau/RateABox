@@ -9,11 +9,11 @@
 <h1>Rate a Box</h1>
 <div class="sidebar">
     <form>
-<!--        <label class="toggle">-->
-<!--            <input type="checkbox"/>-->
-<!--            <span class="slider"></span>-->
-<!--            <span class="labels" data-on="9" data-off="12"></span>-->
-<!--        </label><br>-->
+        <!--        <label class="toggle">-->
+        <!--            <input type="checkbox"/>-->
+        <!--            <span class="slider"></span>-->
+        <!--            <span class="labels" data-on="9" data-off="12"></span>-->
+        <!--        </label><br>-->
         <input type="radio" value="9" class="radButton" id="rad1" name="lines"/>
         <label for="rad1">9</label>
         <input type="radio" value="12" class="radButton" id="rad2" name="lines"/>
@@ -25,19 +25,12 @@
         <input type="button" value="Grade" onclick="grade()" class="button"/>
     </form>
 </div>
-    <div class = "main">
-    <div id = "canvas"></div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/%E0%B9%81%E0%B8%9E%E0%B8%99%E0%B8%94%E0%B9%89%E0%B8%B2.jpg" width="640" height="360">
-        <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-
-    <!-- Load our React component. -->
-    <script src="Canvas.tsx"></script>
+<div class="main">
+    <div id="canvas_container"></div>
 </div>
 
-<script src="index.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="Canvas.tsx"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 
+const e = React.createElement;
 interface CanvasProps {
     width: number;
     height: number;
@@ -113,4 +115,9 @@ Canvas.defaultProps = {
     height: window.innerHeight,
 };
 
-export default Canvas;
+// export default Canvas;
+
+const domContainer = document.querySelector('#canvas_container');
+// @ts-ignore
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(Canvas));

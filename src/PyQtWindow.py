@@ -1,5 +1,5 @@
 import sys
-from.QtWidgets import *
+from PyQt5.QtWidgets import *
 
 class Window(QMainWindow):
     def __init__(self):

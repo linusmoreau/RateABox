@@ -43,7 +43,7 @@ def group_lines(lines):
             best_a = None   # min_dif of most suited line
             for i in range(len(angles)):
                 if lines[i] not in chosen:
-                    min_dif = min([abs(angles[i] - angles[a]) for a in range(len(group))])
+                    min_dif = min([abs(angles[i] - angles[a]) for a in group])
                     if best is None or min_dif < best_a:
                         best = lines[i]
                         best_a = min_dif
@@ -114,6 +114,7 @@ def sum_square_angle_from_point(point, lines):
 
 
 def rate_box(lines):
+    """rate_box returns a rating for the box defined by the given lines"""
     total = 0
     groups = group_lines(lines)
     for group in groups:

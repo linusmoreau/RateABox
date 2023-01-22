@@ -2,27 +2,39 @@
 export class Line {
     start: [number, number];
     end: [number, number];
-    y_equation: ([number, number] | null);   // y = number * x + number; null if vertical
-    x_equation: ([number, number] | null);   // x = number * y + number; null if horizontal
+    equation: ([number, number, number]);    // n * x + n * y + n = 0
 
     // start and end cannot be equal
     constructor(start: [number, number], end: [number, number]) {
         this.start = start;
         this.end = end;
-        if (start[0] == end[0]) {
-            this.y_equation = null
-        } else {
-            this.y_equation = [(end[0] - start[0]) / (end[1] - start[1]), start[1]]
-        }
-        if (start[1] == end[1]) {
-            this.x_equation = null
-        } else {
-            this.x_equation = [(end[1] - start[1]) / (end[0] - start[0]), start[0]]
-        }
+        let x_dif: number = end[0] - start[0];
+        let y_dif: number = end[1] - start[1];
+        let d: number = gcd(x_dif, y_dif);
+        this.equation = [x_dif / d, y_dif / d, start[0]]
     }
 
     print() : void {
         console.log(`Line from (${this.start}) to (${this.end})`);
+    }
+
+    distance_from_point(point: [number, number]) : number {
+        let a: number = this.equation[0];
+        let b: number = this.equation[1];
+        let c: number = this.equation[2];
+        return Math.abs(a * point[0] + b * point[1] + c) / Math.sqrt(a**2 + b**2);
+    }
+}
+
+function gcd(a, b) : number {
+    a = Math.abs(a);
+    b = Math.abs(b);
+    if (b > a) {let temp = a; a = b; b = temp;}
+    while (true) {
+        if (b == 0) return a;
+        a %= b;
+        if (a == 0) return b;
+        b %= a;
     }
 }
 
@@ -39,21 +51,14 @@ function group_lines(lines: Line[]) : Line[][] {
 
 // is_parallel returns true if all lines are parallel
 function is_parallel(lines: Line[]) : boolean {
-    let x_parallel: boolean = true;
-    let y_parallel: boolean = true;
+    let parallel: boolean = true;
     for (let line of lines) {
-        if (line.y_equation == null || line.y_equation[0] != lines[0].y_equation[0]) {
-            y_parallel = false;
+        if (line.equation[0] != lines[0].equation[0] || line.equation[1] != lines[1].equation[1]) {
+            parallel = false;
             break;
         }
     }
-    for (let line of lines) {
-        if (line.x_equation == null || line.x_equation[0] != lines[0].x_equation[0]) {
-            x_parallel = false;
-            break;
-        }
-    }
-    return x_parallel || y_parallel;
+    return parallel;
 }
 
 function determine_vanishing_point(lines: Line[]) : ([number, number] | null) {
@@ -61,11 +66,15 @@ function determine_vanishing_point(lines: Line[]) : ([number, number] | null) {
         return null;
     }
 
-    return [0, 0]
+    return [0, 0];
 }
 
-function sum_square_distance_from_point(point: [number, number], lines: Line[]) {
-
+function sum_square_distance_from_point(point: [number, number], lines: Line[]) : number {
+    let total: number = 0;
+    for (let line of lines) {
+        total += line.distance_from_point(point);
+    }
+    return total;
 }
 
 // rate_box receives the lines defining the edges of a box and returns a rating.

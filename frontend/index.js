@@ -1,8 +1,21 @@
-function pencil() {
-    alert("You've switched to pencil'");
+var current = "Draw";
+function draw(value) {
+    if (current !== value) {
+        var element = document.getElementById("er");
+        element.className = "button";
+        element = document.getElementById("dr");
+        element.className = "highlight";
+        current = "Draw";
+    }
 }
-function eraser() {
-    alert("You've switched to eraser");
+function eraser(value) {
+    if (current !== value) {
+        var element = document.getElementById("dr");
+        element.className = "button";
+        element = document.getElementById("er");
+        element.className = "highlight";
+        current = "Eraser";
+    }
 }
 function undo() {
     alert("You've switched to undo");

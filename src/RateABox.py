@@ -1,5 +1,6 @@
 import pygame
 import pygame_widgets
+import sys
 from typing import *
 
 
@@ -24,14 +25,14 @@ def mouseReleased():
 
 
 if __name__ == "__main__":
-    # info = pygame.display.Info()
-    # screen_width, screen_height = info.current_w, info.current_h
+    pygame.init()
     window = pygame.display.set_mode((600, 400))
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouseReleased()
             elif event.type == pygame.MOUSEBUTTONDOWN:

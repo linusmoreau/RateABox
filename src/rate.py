@@ -25,8 +25,32 @@ class Line:
 
 def group_lines(lines):
     """group_lines groups the lines based on if they should share a vanishing point"""
+    groups = []
+    chosen = set()
     group_size = len(lines) // 3
-    return []
+    angles = []
+    for line in lines:
+        x1, y1 = line.start
+        x2, y2 = line.end
+        dot = x1 * x2 + y1 * y2
+        det = x1 * y2 - y1 * x2
+        angles.append(math.atan2(det, dot))
+
+    while len(chosen) < len(lines):
+        group = []
+        for _ in range(group_size):
+            best = None     # index of most suited line
+            best_a = None   # min_dif of most suited line
+            for i in range(len(angles)):
+                if lines[i] not in chosen:
+                    min_dif = min([abs(angles[i] - angles[a]) for a in range(len(group))])
+                    if best is None or min_dif < best_a:
+                        best = lines[i]
+                        best_a = min_dif
+                chosen.add(lines[best])
+                group.append(best)
+        groups.append([lines[i] for i in group])
+    return groups
 
 
 def is_parallel(lines):
@@ -38,10 +62,12 @@ def is_parallel(lines):
 
 
 def determine_vanishing_point(lines):
+    """determine_vanishing_point determines the ideal vanishing point"""
     if is_parallel(lines):
         return None
-
-    return 0, 0
+    p0 = np.array([line.start for line in lines])
+    p1 = np.array([line.end for line in lines])
+    return intersect(p0, p1)
 
 
 def intersect(P0, P1):
@@ -50,6 +76,7 @@ def intersect(P0, P1):
     returns the least squares intersection of the N
     lines from the system given by eq. 13 in
     http://cal.cs.illinois.edu/~johannes/research/LS_line_intersect.pdf.
+    Credit to kevinkayaks.
     """
     # generate all line direction vectors
     n = (P1 - P0) / np.linalg.norm(P1 - P0, axis=1)[:, np.newaxis]  # normalized

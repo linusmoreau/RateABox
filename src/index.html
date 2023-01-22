@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Including a External JavaScript File</title>
-    <link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <h1>Rate a Box</h1>
@@ -26,14 +26,7 @@
         <input type="button" value="Grade" onclick="grade()" class="button"/>
     </form>
 </div>
-<div class="main">
-    <div id="canvas_container"></div>
-</div>
-
-<script src="{{url_for('static', filename='index.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="Canvas.tsx"></script>
+<script src="../build/index.js"></script>
 </body>
 </html>

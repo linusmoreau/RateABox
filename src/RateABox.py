@@ -1,5 +1,5 @@
 import numpy as np
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify, make_response
 
 
 app = Flask(__name__, template_folder='../frontend', static_folder='../frontend')
@@ -10,9 +10,15 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/rate')
-def rate(n):
-    print(n)
+@app.route('/rate', methods=['GET', 'POST'])
+def rate():
+    message = None
+    if request.method == 'POST':
+        datafromjs = request.form['mydata']
+        result = "return this"
+        resp = make_response('{"response": ' + result + '}')
+        resp.headers['Content-Type'] = "application/json"
+        return resp
 
 
 def intersect(P0, P1):

@@ -1,6 +1,38 @@
-import * as $ from 'jquery'
+let current: string = "Draw";
+let tolerance: number = 15
 
-let TOLERANCE: number = 15
+function draw(value: string): void {
+    if (current !== value) {
+        let element: HTMLElement = document.getElementById("er");
+        element.className = "button";
+        element = document.getElementById("dr");
+        element.className = "highlight";
+        current = "Draw";
+    }
+}
+
+function eraser(value: any): void {
+    if (current !== value) {
+        let element: HTMLElement = document.getElementById("dr");
+        element.className = "button";
+        element = document.getElementById("er");
+        element.className = "highlight";
+        current = "Eraser";
+    }
+}
+
+function undo(): void {
+    alert("You've switched to undo");
+}
+
+function redo(): void {
+    alert("You've switched to redo");
+}
+
+function grade(): void {
+    // alert("Your score is 100");
+    rate_box([])
+}
 
 export class Line {
     start: [number, number];
@@ -100,16 +132,11 @@ function sum_square_angle_from_point(point: [number, number], lines: Line[]) {
 // rate_box receives the lines defining the edges of a box and returns a rating.
 // Argument lines must be of length 9 or 12
 export function rate_box(lines: Line[]) : number {
-    $.ajax({
-        type: "POST",
-        url: "../src/RateABox.py",
-        data: {param: "Noodles"}
-    }).done(function(o) {
-        alert("Hello World");
-    });
+    alert("Hello There")
     let groups: Line[][] = group_lines(lines);
     for (let group of groups) {
 
     }
     return 0;
 }
+

@@ -24,6 +24,12 @@ export class Line {
         let c: number = this.equation[2];
         return Math.abs(a * point[0] + b * point[1] + c) / Math.sqrt(a**2 + b**2);
     }
+
+    angle_from_point(point: [number, number]) : number {
+        let opp: number = this.distance_from_point(point);
+        let hyp: number = Math.sqrt((point[0]**2) + (point[1]-this.equation[2])**2);
+        return Math.sin(opp / hyp);
+    }
 }
 
 // gcd returns the greatest common denominator of the two given numbers
@@ -70,10 +76,20 @@ function determine_vanishing_point(lines: Line[]) : ([number, number] | null) {
     return [0, 0];
 }
 
+// sum_square_distance_from_point returns the sum of the minimum square distance from each line to the given point
 function sum_square_distance_from_point(point: [number, number], lines: Line[]) : number {
     let total: number = 0;
     for (let line of lines) {
         total += line.distance_from_point(point);
+    }
+    return total;
+}
+
+// sum_square_angle_from_point returns the sum of square degrees that each line deviates from the given point
+function sum_square_angle_from_point(point: [number, number], lines: Line[]) {
+    let total: number = 0;
+    for (let line of lines) {
+        total += line.angle_from_point(point);
     }
     return total;
 }

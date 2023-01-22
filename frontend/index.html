@@ -10,6 +10,15 @@
 <h1>Rate a Box</h1>
 <div class="sidebar">
     <form>
+<!--        <label class="toggle">-->
+<!--            <input type="checkbox"/>-->
+<!--            <span class="slider"></span>-->
+<!--            <span class="labels" data-on="9" data-off="12"></span>-->
+<!--        </label><br>-->
+        <input type="radio" value="9" class="radButton" id="rad1" name="lines"/>
+        <label for="rad1">9</label>
+        <input type="radio" value="12" class="radButton" id="rad2" name="lines"/>
+        <label for="rad2">12</label><br>
         <input type="button" value="Draw" onclick="draw(this.value)" class="highlight" id="dr"/><br>
         <input type="button" value="Eraser" onclick="eraser(this.value)" class="button" id="er"/><br>
         <input type="button" value="Undo" onclick="undo()" class="button"/><br>

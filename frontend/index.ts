@@ -1,3 +1,5 @@
+import {rate_box} from "../src/rater";
+
 let current: string = "Draw";
 
 function draw(value: string): void {
@@ -29,5 +31,6 @@ function redo(): void {
 }
 
 function grade(): void {
+    rate_box([])
     alert("Your score is 100");
 }

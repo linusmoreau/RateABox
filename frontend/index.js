@@ -1,3 +1,6 @@
+"use strict";
+exports.__esModule = true;
+var rater_1 = require("../src/rater");
 var current = "Draw";
 function draw(value) {
     if (current !== value) {
@@ -24,5 +27,6 @@ function redo() {
     alert("You've switched to redo");
 }
 function grade() {
+    (0, rater_1.rate_box)([]);
     alert("Your score is 100");
 }

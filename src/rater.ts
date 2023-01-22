@@ -1,3 +1,6 @@
+import * as $ from 'jquery'
+
+let TOLERANCE: number = 15
 
 export class Line {
     start: [number, number];
@@ -97,6 +100,13 @@ function sum_square_angle_from_point(point: [number, number], lines: Line[]) {
 // rate_box receives the lines defining the edges of a box and returns a rating.
 // Argument lines must be of length 9 or 12
 export function rate_box(lines: Line[]) : number {
+    $.ajax({
+        type: "POST",
+        url: "../src/RateABox.py",
+        data: {param: "Noodles"}
+    }).done(function(o) {
+        alert("Hello World");
+    });
     let groups: Line[][] = group_lines(lines);
     for (let group of groups) {
 

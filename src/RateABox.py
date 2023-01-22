@@ -1,11 +1,11 @@
 import pygame
-import pygame_widgets
 import sys
 from typing import *
+from rate import rate_box, Line
 
 
 lines = []
-grading_menu = False
+finished = False
 start: Union[List[int], None] = None
 
 
@@ -15,20 +15,20 @@ def mousePressed():
 
 
 def mouseReleased():
-    global start
+    global start, finished
     pos = pygame.mouse.get_pos()
-    lines.append([start, pos])
+    lines.append(Line(start, pos))
     start = None
     if len(lines) == 9:
-        grading_menu = True
-    print(lines)
+        print(rate_box(lines))
+        finished = True
 
 
 if __name__ == "__main__":
     pygame.init()
     window = pygame.display.set_mode((600, 400))
 
-    while True:
+    while not finished:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -44,6 +44,6 @@ if __name__ == "__main__":
             pygame.draw.line(window, (0, 0, 0), start, pygame.mouse.get_pos())
 
         for line in lines:
-            pygame.draw.line(window, (0, 0, 0), line[0], line[1])
+            pygame.draw.line(window, (0, 0, 0), line.start, line.end)
 
         pygame.display.flip()

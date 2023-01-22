@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from typing import *
 
 
 class Line:
@@ -10,6 +11,9 @@ class Line:
         y_dif: int = end[1] - start[1]
         d: int = math.gcd(x_dif, y_dif)
         self.equation: (int, int, int) = [x_dif // d, y_dif // d, start[0]]
+
+    def __repr__(self):
+        return str(self.start) + " => " + str(self.end)
 
     def distance_from_point(self, point):
         a = self.equation[0]
@@ -43,12 +47,15 @@ def group_lines(lines):
             best_a = None   # min_dif of most suited line
             for i in range(len(angles)):
                 if lines[i] not in chosen:
-                    min_dif = min([abs(angles[i] - angles[a]) for a in group])
+                    if len(group) == 0:
+                        min_dif = 0
+                    else:
+                        min_dif = min([abs(angles[i] - angles[a]) for a in group])
                     if best is None or min_dif < best_a:
-                        best = lines[i]
+                        best = i
                         best_a = min_dif
-                chosen.add(lines[best])
-                group.append(best)
+            chosen.add(lines[best])
+            group.append(best)
         groups.append([lines[i] for i in group])
     return groups
 
@@ -61,7 +68,7 @@ def is_parallel(lines):
     return True
 
 
-def determine_vanishing_point(lines):
+def determine_vanishing_point(lines: List[Line]):
     """determine_vanishing_point determines the ideal vanishing point"""
     if is_parallel(lines):
         return None
@@ -70,7 +77,7 @@ def determine_vanishing_point(lines):
     return intersect(p0, p1)
 
 
-def intersect(P0, P1):
+def intersect(P0: np.ndarray, P1: np.ndarray):
     """P0 and P1 are NxD arrays defining N lines.
     D is the dimension of the space. This function
     returns the least squares intersection of the N
@@ -96,7 +103,7 @@ def intersect(P0, P1):
     return p
 
 
-def sum_square_distance_from_point(point, lines):
+def sum_square_distance_from_point(point: (int, int), lines: List[Line]):
     """sum_square_distance_from_point returns the sum of the minimum square distance from each line to the given
     point """
     total = 0
@@ -105,7 +112,7 @@ def sum_square_distance_from_point(point, lines):
     return total
 
 
-def sum_square_angle_from_point(point, lines):
+def sum_square_angle_from_point(point: (int, int), lines: List[Line]):
     """sum_square_angle_from_point returns the sum of square degrees that each line deviates from the given point"""
     total = 0
     for line in lines:
@@ -113,7 +120,7 @@ def sum_square_angle_from_point(point, lines):
     return total
 
 
-def rate_box(lines):
+def rate_box(lines: List[Line]):
     """rate_box returns a rating for the box defined by the given lines"""
     total = 0
     groups = group_lines(lines)

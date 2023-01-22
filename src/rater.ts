@@ -26,7 +26,8 @@ export class Line {
     }
 }
 
-function gcd(a, b) : number {
+// gcd returns the greatest common denominator of the two given numbers
+function gcd(a: number, b: number) : number {
     a = Math.abs(a);
     b = Math.abs(b);
     if (b > a) {let temp = a; a = b; b = temp;}
@@ -38,7 +39,7 @@ function gcd(a, b) : number {
     }
 }
 
-
+// group_lines groups the lines based on if they should share a vanishing point
 function group_lines(lines: Line[]) : Line[][] {
     let group_size: number;
     if (lines.length == 9) {
@@ -86,4 +87,3 @@ export function rate_box(lines: Line[]) : number {
     }
     return 0;
 }
-
